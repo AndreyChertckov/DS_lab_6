@@ -55,13 +55,10 @@ class Server(Thread):
                         filename, body = data.split(b'\r\n\r\n', 1)
                         filename = filename.decode('utf-8')
                         base_filename, type_ = filename.split('.')
-                        new_filename = base_filename
-                        self.filenames += [new_filename]
                         copy = 1
-                        while new_filename in self.filenames:
-                            new_filename = base_filename + '_copy' + str(copy) + '.' + type_
+                        while filename in self.filenames:
+                            filename = base_filename + '_copy' + str(copy) + '.' + type_
                             copy += 1
-                        filename = new_filename
                         self.filenames += [filename]
                         self.clients[user]['filename'] = filename
                         self.clients[user]['file'] = open(filename, 'wb')
