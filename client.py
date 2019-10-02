@@ -8,7 +8,6 @@ def main():
     data = filename.encode('utf-8') + b'\r\n\r\n'
     with open(filename, 'rb') as f:
         data += f.read()
-    data += b'\0'
     sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     sock.connect((address, port))
     data = [data[i:i+1024] for i in range(0, len(data), 1024)]
